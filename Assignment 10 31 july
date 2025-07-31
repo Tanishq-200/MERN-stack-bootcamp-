@@ -2,21 +2,209 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Weather App</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Professional Weather Site</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(to right top, #74ebd5, #acb6e5);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      color: #fff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #ffeb3b;
+    }
+
+    /* Main Content */
+    .main-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .weather-box {
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      padding: 30px;
+      width: 100%;
+      max-width: 500px;
+      text-align: center;
+      color: #fff;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .weather-box h2 {
+      margin-bottom: 20px;
+      font-size: 28px;
+    }
+
+    .search-bar {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .search-bar input {
+      flex: 1;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+      background: #e3f2fd;
+      color: #333;
+    }
+
+    .search-bar button {
+      padding: 12px 18px;
+      background-color: #3f51b5;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .search-bar button:hover {
+      background-color: #303f9f;
+    }
+
+    #weatherResult {
+      margin-top: 20px;
+    }
+
+    .weather-info {
+      background-color: rgba(255, 255, 255, 0.15);
+      padding: 15px;
+      border-radius: 12px;
+      color: #fff;
+    }
+
+    .error {
+      color: #ff4e4e;
+      font-weight: bold;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .search-bar {
+        flex-direction: column;
+      }
+
+      .search-bar button {
+        width: 100%;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Weather App</h1>
-    <div class="search">
-      <input type="text" id="cityInput" placeholder="Enter city name" />
-      <button onclick="getWeather()">Search</button>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">🌤 WeatherPro</div>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Forecast</a></li>
+      <li><a href="#">About</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Weather Card -->
+  <main class="main-container">
+    <div class="weather-box">
+      <h2><span>⛅</span> Weather Forecast</h2>
+      <div class="search-bar">
+        <input type="text" id="cityInput" placeholder="Enter city..." />
+        <button onclick="getWeather()">Search</button>
+      </div>
+      <div id="weatherResult"></div>
     </div>
-    <div class="weather" id="weather">
-      <!-- Weather details will be shown here -->
-    </div>
-  </div>
-  <script src="script.js"></script>
+  </main>
+
+  <script>
+    const apiKey = 'c674805a904af77fa72e8625765d07d6'; // Replace with your OpenWeatherMap API key
+
+    function getWeather() {
+      const city = document.getElementById('cityInput').value.trim();
+      const resultDiv = document.getElementById('weatherResult');
+
+      if (!city) {
+        resultDiv.innerHTML = <p class="error">Please enter a city name.</p>;
+        return;
+      }
+
+      resultDiv.innerHTML = <p style="color:#fff;">Loading...</p>;
+
+      fetch(
+        https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${apiKey}&units=metric
+      )
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('City not found');
+          }
+          return response.json();
+        })
+        .then((data) => {
+          const html = `
+            <div class="weather-info">
+              <h3>${data.name}, ${data.sys.country}</h3>
+              <p>🌡 Temperature: ${data.main.temp}°C</p>
+              <p>☁ Weather: ${data.weather[0].description}</p>
+              <p>💧 Humidity: ${data.main.humidity}%</p>
+              <p>🌬 Wind Speed: ${data.wind.speed} m/s</p>
+            </div>
+          `;
+          resultDiv.innerHTML = html;
+        })
+        .catch((error) => {
+          resultDiv.innerHTML = <p class="error">${error.message}</p>;
+        });
+    }
+  </script>
 </body>
 </html>
