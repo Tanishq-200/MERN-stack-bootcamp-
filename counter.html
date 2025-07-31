@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Professional Counter App</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+    }
+
+    .counter-container {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 40px 30px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+    }
+
+    .counter-container h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    .count {
+      font-size: 64px;
+      font-weight: bold;
+      margin: 20px 0;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .buttons button {
+      padding: 12px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .increment {
+      background-color: #4caf50;
+    }
+
+    .decrement {
+      background-color: #f44336;
+    }
+
+    .reset {
+      background-color: #ff9800;
+    }
+
+    .buttons button:hover {
+      opacity: 0.85;
+    }
+
+    @media (max-width: 500px) {
+      .buttons {
+        flex-direction: column;
+      }
+
+      .buttons button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="counter-container">
+    <h1>Interactive Counter</h1>
+    <div class="count" id="count">0</div>
+    <div class="buttons">
+      <button class="increment" onclick="changeCount(1)">➕ Increment</button>
+      <button class="decrement" onclick="changeCount(-1)">➖ Decrement</button>
+      <button class="reset" onclick="resetCount()">🔁 Reset</button>
+    </div>
+  </div>
+
+  <script>
+    let count = 0;
+
+    function updateDisplay() {
+      document.getElementById('count').textContent = count;
+    }
+
+    function changeCount(value) {
+      count += value;
+      updateDisplay();
+    }
+
+    function resetCount() {
+      count = 0;
+      updateDisplay();
+    }
+  </script>
+
+</body>
+</html>
