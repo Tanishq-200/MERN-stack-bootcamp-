@@ -1,0 +1,26 @@
+.app {
+  padding: 30px;
+  font-family: Arial, sans-serif;
+  max-width: 600px;
+  margin: auto;
+}
+
+input, textarea {
+  display: block;
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 8px;
+  font-size: 16px;
+}
+
+button {
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.post {
+  border-bottom: 1px solid #ccc;
+  margin-top: 20px;
+  padding-bottom: 10px;
+}
