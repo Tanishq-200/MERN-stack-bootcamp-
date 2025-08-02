@@ -1,0 +1,4 @@
+npx create-react-app DarkLightModeReact
+cd DarkLightModeReact
+# Replace all 4 files above
+npm start
