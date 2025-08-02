@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ID Card</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="id-card">
+    <div class="header">
+      <h2>College Name</h2>
+    </div>
+    <div class="photo-section">
+      <img src="https://via.placeholder.com/100" alt="Profile Photo" class="profile-img" />
+    </div>
+    <div class="info-section">
+      <p><strong>Name:</strong> Tanishq Sharma</p>
+      <p><strong>Course:</strong> B.Tech CSE</p>
+      <p><strong>Roll No:</strong> 23CS1001</p>
+      <p><strong>Valid Till:</strong> June 2026</p>
+    </div>
+    <div class="footer">
+      <p>Authorized Signature</p>
+    </div>
+  </div>
+</body>
+</html>
