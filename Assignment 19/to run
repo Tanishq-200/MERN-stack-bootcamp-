@@ -1,0 +1,4 @@
+npx create-react-app AddToCartReact
+cd AddToCartReact
+# replace the files with above content
+npm start
