@@ -1,4 +1,0 @@
-// fist run this using this 
-npx create-react-app client
-cd client
-npm install axios
